@@ -71,24 +71,24 @@ export function calculateCashbookBalance(
  */
 export function allocatePaymentToSales(
   paymentAmount: number,
-  unpaidSales: Sale[] // Must be sorted oldest first
+  unpaidItems: { id: string; total: number; amount_paid: number }[] // Must be sorted oldest first
 ): { saleId: string; amountApplied: number; newStatus: 'paid' | 'partial' }[] {
   let remainingPayment = paymentAmount
   const allocations = []
 
-  for (const sale of unpaidSales) {
+  for (const item of unpaidItems) {
     if (remainingPayment <= 0) break
 
-    const dueOnSale = sale.total - sale.amount_paid
+    const dueOnSale = item.total - item.amount_paid
     if (dueOnSale <= 0) continue
 
     const amountToApply = Math.min(remainingPayment, dueOnSale)
     remainingPayment -= amountToApply
 
     allocations.push({
-      saleId: sale.id,
+      saleId: item.id,
       amountApplied: amountToApply,
-      newStatus: (sale.amount_paid + amountToApply) >= sale.total ? 'paid' : 'partial'
+      newStatus: (item.amount_paid + amountToApply) >= item.total ? 'paid' : 'partial'
     })
   }
 

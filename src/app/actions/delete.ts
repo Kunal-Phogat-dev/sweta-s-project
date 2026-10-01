@@ -19,7 +19,7 @@ export async function deleteRecord(tableName: string, id: string, redirectPath?:
   }
 
   // Soft delete by setting deleted_at to current timestamp
-  const { error } = await supabase
+  const { error } = await (supabase as any)
     .from(tableName)
     .update({ deleted_at: new Date().toISOString() })
     .eq('id', id)
