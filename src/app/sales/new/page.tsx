@@ -1,7 +1,7 @@
 import { createClient } from '@/utils/supabase/server'
 import { redirect } from 'next/navigation'
 import { createSale } from '../actions'
-import { Button } from '@/components/ui/button'
+import { SubmitButton } from '@/components/ui/submit-button'
 import { Input } from '@/components/ui/input'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 
@@ -60,9 +60,7 @@ export default async function NewSalePage() {
               <p className="text-xs text-slate-500">Leave empty or 0 if this is a credit sale.</p>
             </div>
 
-            <Button type="submit" className="w-full h-12 text-lg font-medium">
-              Save Sale
-            </Button>
+            <SubmitButton>Save Sale</SubmitButton>
           </form>
         </CardContent>
       </Card>

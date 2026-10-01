@@ -1,7 +1,7 @@
 import { createClient } from '@/utils/supabase/server'
 import { redirect } from 'next/navigation'
 import { createContact } from '../actions'
-import { Button } from '@/components/ui/button'
+import { SubmitButton } from '@/components/ui/submit-button'
 import { Input } from '@/components/ui/input'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 
@@ -58,9 +58,7 @@ export default async function NewContactPage() {
               </select>
             </div>
 
-            <Button type="submit" className="w-full h-12 text-lg font-medium">
-              Save Contact
-            </Button>
+            <SubmitButton>Save Contact</SubmitButton>
           </form>
         </CardContent>
       </Card>
