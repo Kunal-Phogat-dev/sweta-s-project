@@ -15,39 +15,43 @@ export default async function Dashboard() {
   const business = businesses?.[0]
   if (!business) redirect('/onboarding')
 
-  // Fetch balances
-  const { data: cashbook } = await supabase.from('cashbook_entries').select('*').eq('business_id', business.id).is('deleted_at', null)
-  const cashBalance = calculateCashbookBalance(cashbook || [], 'cash')
-  const bankBalance = calculateCashbookBalance(cashbook || [], 'bank')
-
-  // Fetch contacts for receivables / payables
-  const { data: contacts } = await supabase.from('contacts').select('*').eq('business_id', business.id).is('deleted_at', null)
-  
-  // Outstanding from sales (Receivables)
-  const { data: sales } = await supabase.from('sales').select('total, amount_paid').eq('business_id', business.id).is('deleted_at', null)
-  const salesDue = (sales || []).reduce((acc, sale) => acc + (sale.total - sale.amount_paid), 0)
-  
-  // Outstanding from purchases (Payables)
-  const { data: purchases } = await supabase.from('purchases').select('total, amount_paid').eq('business_id', business.id).is('deleted_at', null)
-  const purchasesDue = (purchases || []).reduce((acc, pur) => acc + (pur.total - pur.amount_paid), 0)
-
-  // Opening balances
-  const openingReceivables = (contacts || []).filter(c => c.opening_balance_type === 'receivable').reduce((acc, c) => acc + (c.opening_balance || 0), 0)
-  const openingPayables = (contacts || []).filter(c => c.opening_balance_type === 'payable').reduce((acc, c) => acc + (c.opening_balance || 0), 0)
-
-  const totalReceivables = salesDue + openingReceivables
-  const totalPayables = purchasesDue + openingPayables
-
-  // This Month simple P&L
   const currentMonth = new Date().toISOString().slice(0, 7) // YYYY-MM
-  const { data: monthlySales } = await supabase.from('sales').select('subtotal').eq('business_id', business.id).is('deleted_at', null).gte('date', `${currentMonth}-01`)
-  const { data: monthlyPurchases } = await supabase.from('purchases').select('subtotal').eq('business_id', business.id).is('deleted_at', null).gte('date', `${currentMonth}-01`)
-  const { data: monthlyExpenses } = await supabase.from('expenses').select('amount').eq('business_id', business.id).is('deleted_at', null).gte('date', `${currentMonth}-01`)
+  
+  // Fetch all dashboard data in parallel for maximum speed
+  const [
+    { data: cashbook },
+    { data: contacts },
+    { data: sales },
+    { data: purchases },
+    { data: monthlySales },
+    { data: monthlyPurchases },
+    { data: monthlyExpenses }
+  ] = await Promise.all([
+    supabase.from('cashbook_entries').select('*').eq('business_id', business.id).is('deleted_at', null),
+    supabase.from('contacts').select('*').eq('business_id', business.id).is('deleted_at', null),
+    supabase.from('sales').select('total, amount_paid').eq('business_id', business.id).is('deleted_at', null),
+    supabase.from('purchases').select('total, amount_paid').eq('business_id', business.id).is('deleted_at', null),
+    supabase.from('sales').select('subtotal').eq('business_id', business.id).is('deleted_at', null).gte('date', `${currentMonth}-01`),
+    supabase.from('purchases').select('subtotal').eq('business_id', business.id).is('deleted_at', null).gte('date', `${currentMonth}-01`),
+    supabase.from('expenses').select('amount').eq('business_id', business.id).is('deleted_at', null).gte('date', `${currentMonth}-01`)
+  ])
 
   const mSales = (monthlySales || []).reduce((acc, s) => acc + s.subtotal, 0)
   const mPurchases = (monthlyPurchases || []).reduce((acc, p) => acc + p.subtotal, 0)
   const mExpenses = (monthlyExpenses || []).reduce((acc, e) => acc + e.amount, 0)
   const mProfit = mSales - mPurchases - mExpenses
+
+  const cashBalance = calculateCashbookBalance(cashbook || [], 'cash')
+  const bankBalance = calculateCashbookBalance(cashbook || [], 'bank')
+
+  const salesDue = (sales || []).reduce((acc, sale) => acc + (sale.total - sale.amount_paid), 0)
+  const purchasesDue = (purchases || []).reduce((acc, pur) => acc + (pur.total - pur.amount_paid), 0)
+
+  const openingReceivables = (contacts || []).filter(c => c.opening_balance_type === 'receivable').reduce((acc, c) => acc + (c.opening_balance || 0), 0)
+  const openingPayables = (contacts || []).filter(c => c.opening_balance_type === 'payable').reduce((acc, c) => acc + (c.opening_balance || 0), 0)
+
+  const totalReceivables = salesDue + openingReceivables
+  const totalPayables = purchasesDue + openingPayables
 
   return (
     <div className="container mx-auto py-6 space-y-6">
