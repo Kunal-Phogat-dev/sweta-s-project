@@ -17,7 +17,7 @@ const supabase = createClient(supabaseUrl, supabaseKey)
 async function seed() {
   console.log('Starting seed...')
 
-  let { data: authData, error: authError } = await supabase.auth.signInWithPassword({
+  const { data: authData, error: authError } = await supabase.auth.signInWithPassword({
     email: 'test@ledgerlite.com',
     password: 'password123',
   })

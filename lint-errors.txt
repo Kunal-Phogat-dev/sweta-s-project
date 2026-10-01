@@ -1,0 +1,140 @@
+
+> ledger-app@0.1.0 lint
+> eslint --fix
+
+
+C:\Users\Lesso\Documents\sweta\ledger-app\public\theme.js
+  7:10  warning  '_' is defined but never used  @typescript-eslint/no-unused-vars
+
+C:\Users\Lesso\Documents\sweta\ledger-app\scripts\seed.ts
+  50:17  warning  'business' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+C:\Users\Lesso\Documents\sweta\ledger-app\src\app\actions\delete.ts
+  22:40  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\Lesso\Documents\sweta\ledger-app\src\app\auth\signout\route.ts
+  4:28  warning  'request' is defined but never used  @typescript-eslint/no-unused-vars
+
+C:\Users\Lesso\Documents\sweta\ledger-app\src\app\cashbook\page.tsx
+  33:31  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\Lesso\Documents\sweta\ledger-app\src\app\contacts\[id]\page.tsx
+  79:22  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\Lesso\Documents\sweta\ledger-app\src\app\contacts\new\page.tsx
+  6:29  warning  'CardHeader' is defined but never used  @typescript-eslint/no-unused-vars
+  6:41  warning  'CardTitle' is defined but never used   @typescript-eslint/no-unused-vars
+
+C:\Users\Lesso\Documents\sweta\ledger-app\src\app\expenses\new\page.tsx
+  6:29  warning  'CardHeader' is defined but never used  @typescript-eslint/no-unused-vars
+  6:41  warning  'CardTitle' is defined but never used   @typescript-eslint/no-unused-vars
+
+C:\Users\Lesso\Documents\sweta\ledger-app\src\app\layout.tsx
+  6:8  warning  'Script' is defined but never used  @typescript-eslint/no-unused-vars
+
+C:\Users\Lesso\Documents\sweta\ledger-app\src\app\onboarding\page.tsx
+   8:69  warning  'CardFooter' is defined but never used                                                                                      @typescript-eslint/no-unused-vars
+  44:6   warning  React Hook useEffect has missing dependencies: 'router' and 'supabase'. Either include them or remove the dependency array  react-hooks/exhaustive-deps
+
+C:\Users\Lesso\Documents\sweta\ledger-app\src\app\page.tsx
+    3:83  warning  'Users' is defined but never used                                @typescript-eslint/no-unused-vars
+   92:20  error    `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+  106:20  error    `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+
+C:\Users\Lesso\Documents\sweta\ledger-app\src\app\payments\new\page.tsx
+  6:29  warning  'CardHeader' is defined but never used  @typescript-eslint/no-unused-vars
+  6:41  warning  'CardTitle' is defined but never used   @typescript-eslint/no-unused-vars
+
+C:\Users\Lesso\Documents\sweta\ledger-app\src\app\purchases\new\page.tsx
+  6:29  warning  'CardHeader' is defined but never used  @typescript-eslint/no-unused-vars
+  6:41  warning  'CardTitle' is defined but never used   @typescript-eslint/no-unused-vars
+
+C:\Users\Lesso\Documents\sweta\ledger-app\src\app\reports\payables\page.tsx
+  37:42  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\Lesso\Documents\sweta\ledger-app\src\app\reports\receivables\page.tsx
+   4:29  warning  'CardHeader' is defined but never used    @typescript-eslint/no-unused-vars
+   4:41  warning  'CardTitle' is defined but never used     @typescript-eslint/no-unused-vars
+  37:34  error    Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\Lesso\Documents\sweta\ledger-app\src\app\sales\new\page.tsx
+  6:29  warning  'CardHeader' is defined but never used  @typescript-eslint/no-unused-vars
+  6:41  warning  'CardTitle' is defined but never used   @typescript-eslint/no-unused-vars
+
+C:\Users\Lesso\Documents\sweta\ledger-app\src\app\settings\page.tsx
+  4:50  warning  'Moon' is defined but never used  @typescript-eslint/no-unused-vars
+
+C:\Users\Lesso\Documents\sweta\ledger-app\src\components\settings\user-management.tsx
+   9:10  warning  'deleteRecord' is defined but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     @typescript-eslint/no-unused-vars
+  12:38  error    Unexpected any. Specify a different type                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     @typescript-eslint/no-explicit-any
+  13:42  error    Unexpected any. Specify a different type                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     @typescript-eslint/no-explicit-any
+  19:5   error    Error: Cannot access variable before it is declared
+
+`fetchUsers` is accessed before it is declared, which prevents the earlier access from updating when this value changes over time.
+
+C:\Users\Lesso\Documents\sweta\ledger-app\src\components\settings\user-management.tsx:19:5
+  17 |
+  18 |   useEffect(() => {
+> 19 |     fetchUsers()
+     |     ^^^^^^^^^^ `fetchUsers` accessed before it is declared
+  20 |   }, [])
+  21 |
+  22 |   async function fetchUsers() {
+
+C:\Users\Lesso\Documents\sweta\ledger-app\src\components\settings\user-management.tsx:22:3
+  20 |   }, [])
+  21 |
+> 22 |   async function fetchUsers() {
+     |   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 23 |     const { data: bUsers } = await supabase.from('business_users').select('*, user_id').eq('business_id', businessId)
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 24 |     const { data: bInvites } = await supabase.from('invites').select('*').eq('business_id', businessId)
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 25 |     setUsers(bUsers || [])
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 26 |     setInvites(bInvites || [])
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 27 |   }
+     | ^^^^ `fetchUsers` is declared here
+  28 |
+  29 |   async function handleInvite(e: React.FormEvent) {
+  30 |     e.preventDefault()  react-hooks/immutability
+  20:6   warning  React Hook useEffect has a missing dependency: 'fetchUsers'. Either include it or remove the dependency array                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                react-hooks/exhaustive-deps
+
+C:\Users\Lesso\Documents\sweta\ledger-app\src\components\theme-provider.tsx
+  29:7  error  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+C:\Users\Lesso\Documents\sweta\ledger-app\src\components\theme-provider.tsx:29:7
+  27 |     const saved = localStorage.getItem('theme') as Theme
+  28 |     if (saved) {
+> 29 |       setTheme(saved)
+     |       ^^^^^^^^ Avoid calling setState() directly within an effect
+  30 |     }
+  31 |   }, [])
+  32 |  react-hooks/set-state-in-effect
+
+C:\Users\Lesso\Documents\sweta\ledger-app\src\components\ui\input.tsx
+  4:18  error  An interface declaring no members is equivalent to its supertype  @typescript-eslint/no-empty-object-type
+
+C:\Users\Lesso\Documents\sweta\ledger-app\src\lib\services\balances.test.ts
+   2:10  warning  'calculateContactBalance' is defined but never used  @typescript-eslint/no-unused-vars
+   7:22  error    Unexpected any. Specify a different type             @typescript-eslint/no-explicit-any
+  17:22  error    Unexpected any. Specify a different type             @typescript-eslint/no-explicit-any
+  29:20  error    Unexpected any. Specify a different type             @typescript-eslint/no-explicit-any
+  40:20  error    Unexpected any. Specify a different type             @typescript-eslint/no-explicit-any
+  51:20  error    Unexpected any. Specify a different type             @typescript-eslint/no-explicit-any
+
+C:\Users\Lesso\Documents\sweta\ledger-app\src\lib\utils.ts
+  1:13  warning  'React' is defined but never used  @typescript-eslint/no-unused-vars
+
+C:\Users\Lesso\Documents\sweta\ledger-app\src\utils\supabase\middleware.ts
+  18:48  warning  'options' is defined but never used  @typescript-eslint/no-unused-vars
+
+Γ£û 42 problems (17 errors, 25 warnings)
+
