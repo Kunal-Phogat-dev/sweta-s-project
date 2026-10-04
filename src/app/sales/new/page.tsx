@@ -18,8 +18,10 @@ export default async function NewSalePage() {
     const description = formData.get('description');
     const date = new Date().toISOString();
 
-    const { data: sale } = await supabase.from('sales').insert({
+    const { data: sale, error: saleError } = await supabase.from('sales').insert({
       business_id: business.id,
+      invoice_number: `INV-${Date.now()}`,
+      gst_amount: 0,
       total: amount,
       subtotal: amount,
       amount_paid: amount,
@@ -27,15 +29,20 @@ export default async function NewSalePage() {
       status: 'paid'
     }).select().single();
 
+    if (saleError) {
+      console.error(saleError);
+    }
+
     if (sale) {
       // Also log to cashbook
       await supabase.from('cashbook_entries').insert({
         business_id: business.id,
         type: 'in',
         amount: amount,
-        payment_mode: 'cash',
+        mode: 'cash',
+        category: 'Sales',
         date: date,
-        description: `Sale: ${description}`
+        note: description
       });
     }
     

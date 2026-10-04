@@ -18,8 +18,10 @@ export default async function NewPurchasePage() {
     const description = formData.get('description');
     const date = new Date().toISOString();
 
-    const { data: purchase } = await supabase.from('purchases').insert({
+    const { data: purchase, error: purchaseError } = await supabase.from('purchases').insert({
       business_id: business.id,
+      bill_number: `BILL-${Date.now()}`,
+      gst_amount: 0,
       total: amount,
       subtotal: amount,
       amount_paid: amount,
@@ -27,14 +29,19 @@ export default async function NewPurchasePage() {
       status: 'paid'
     }).select().single();
 
+    if (purchaseError) {
+      console.error(purchaseError);
+    }
+
     if (purchase) {
       await supabase.from('cashbook_entries').insert({
         business_id: business.id,
         type: 'out',
         amount: amount,
-        payment_mode: 'cash',
+        mode: 'cash',
+        category: 'Purchases',
         date: date,
-        description: `Purchase: ${description}`
+        note: description
       });
     }
     

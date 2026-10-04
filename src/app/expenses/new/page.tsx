@@ -19,22 +19,28 @@ export default async function NewExpensePage() {
     const category = formData.get('category');
     const date = new Date().toISOString();
 
-    const { data: expense } = await supabase.from('expenses').insert({
+    const { data: expense, error: expenseError } = await supabase.from('expenses').insert({
       business_id: business.id,
       amount: amount,
-      category: category,
-      description: description,
+      category: category as string,
+      mode: 'cash',
+      note: description as string,
       date: date
     }).select().single();
+
+    if (expenseError) {
+      console.error(expenseError);
+    }
 
     if (expense) {
       await supabase.from('cashbook_entries').insert({
         business_id: business.id,
         type: 'out',
         amount: amount,
-        payment_mode: 'cash',
+        mode: 'cash',
+        category: category as string,
         date: date,
-        description: `Expense (${category}): ${description}`
+        note: description as string
       });
     }
     
