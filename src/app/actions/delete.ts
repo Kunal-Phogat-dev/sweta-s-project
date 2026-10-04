@@ -12,7 +12,7 @@ export async function deleteTransaction(id: string, type: string) {
   const business = businesses?.[0];
   if (!business) return;
 
-  const table = type === 'sale' ? 'sales' : 'purchases';
+  const table = type === 'sale' ? 'sales' : type === 'purchase' ? 'purchases' : 'expenses';
   
   // We just soft delete it for safety, or hard delete it
   await supabase.from(table).delete().eq('id', id).eq('business_id', business.id);

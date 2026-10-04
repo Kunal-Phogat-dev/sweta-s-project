@@ -19,12 +19,12 @@ export default async function DashboardPage() {
     { data: cashbook },
     { data: sales },
     { data: purchases },
-    { data: contacts }
+    { data: expenses }
   ] = await Promise.all([
     supabase.from('cashbook_entries').select('*').eq('business_id', business.id).is('deleted_at', null),
     supabase.from('sales').select('*').eq('business_id', business.id).is('deleted_at', null),
     supabase.from('purchases').select('*').eq('business_id', business.id).is('deleted_at', null),
-    supabase.from('contacts').select('*').eq('business_id', business.id).is('deleted_at', null)
+    supabase.from('expenses').select('*').eq('business_id', business.id).is('deleted_at', null)
   ]);
 
   // Calculate Balances
@@ -37,7 +37,9 @@ export default async function DashboardPage() {
   // Combine recent activity
   const recentSales = (sales || []).map(s => ({ id: s.id, type: 'sale', amount: s.total, date: s.date, title: 'Sale' }));
   const recentPurchases = (purchases || []).map(p => ({ id: p.id, type: 'purchase', amount: p.total, date: p.date, title: 'Purchase' }));
-  const allActivity = [...recentSales, ...recentPurchases].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+  const recentExpenses = (expenses || []).map(e => ({ id: e.id, type: 'expense', amount: e.amount, date: e.date, title: `Expense (${e.category})` }));
+  
+  const allActivity = [...recentSales, ...recentPurchases, ...recentExpenses].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
   const recentActivity = allActivity.slice(0, 5);
 
   // Calculate Real Chart Data (Last 7 Days)
@@ -49,9 +51,9 @@ export default async function DashboardPage() {
     const shortName = d.toLocaleDateString('en-US', { weekday: 'short' });
     
     const daySales = allActivity.filter(a => a.type === 'sale' && a.date.startsWith(dateStr)).reduce((sum, a) => sum + a.amount, 0);
-    const dayPurchases = allActivity.filter(a => a.type === 'purchase' && a.date.startsWith(dateStr)).reduce((sum, a) => sum + a.amount, 0);
+    const dayOut = allActivity.filter(a => (a.type === 'purchase' || a.type === 'expense') && a.date.startsWith(dateStr)).reduce((sum, a) => sum + a.amount, 0);
     
-    chartData.push({ name: shortName, In: daySales, Out: dayPurchases });
+    chartData.push({ name: shortName, In: daySales, Out: dayOut });
   }
 
   return (
@@ -136,7 +138,7 @@ export default async function DashboardPage() {
                   <div key={act.id} className="flex justify-between items-center">
                     <div className="flex items-center gap-4">
                       <div className={`w-10 h-10 rounded-full flex items-center justify-center font-bold ${act.type === 'sale' ? 'bg-green-50 text-green-600' : 'bg-pink-50 text-pink-600'}`}>
-                        {act.type === 'sale' ? 'S' : 'P'}
+                        {act.type === 'sale' ? 'S' : act.type === 'purchase' ? 'P' : 'E'}
                       </div>
                       <div>
                         <div className="font-bold text-sm">{act.title}</div>
