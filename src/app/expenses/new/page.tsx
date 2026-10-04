@@ -1,6 +1,7 @@
 import { createClient } from '@/utils/supabase/server';
 import { redirect } from 'next/navigation';
 import Link from 'next/link';
+import { SubmitButton } from '@/components/ui/submit-button';
 
 export default async function NewExpensePage() {
   const supabase = await createClient();
@@ -96,12 +97,7 @@ export default async function NewExpensePage() {
             />
           </div>
 
-          <button 
-            type="submit" 
-            className="w-full h-14 bg-black text-white font-bold rounded-lg hover:bg-pink-600 transition-colors mt-4 text-lg"
-          >
-            Log Expense
-          </button>
+          <SubmitButton>Log Expense</SubmitButton>
         </form>
 
       </div>

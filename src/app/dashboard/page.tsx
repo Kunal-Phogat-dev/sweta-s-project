@@ -3,6 +3,7 @@ import { ArrowRight, Plus, Receipt, LogOut } from 'lucide-react';
 import { CashflowChart } from '@/components/dashboard/cashflow-chart';
 import { createClient } from '@/utils/supabase/server';
 import { redirect } from 'next/navigation';
+import { DeleteButton } from '@/components/ui/delete-button';
 
 export default async function DashboardPage() {
   const supabase = await createClient();
@@ -142,8 +143,11 @@ export default async function DashboardPage() {
                         <div className="text-xs font-medium text-gray-400">{new Date(act.date).toLocaleDateString()}</div>
                       </div>
                     </div>
-                    <div className={`font-bold text-sm ${act.type === 'sale' ? 'text-green-600' : ''}`}>
-                      {act.type === 'sale' ? '+' : '-'}₹{act.amount.toLocaleString('en-IN')}
+                    <div className="flex items-center gap-4">
+                      <div className={`font-bold text-sm ${act.type === 'sale' ? 'text-green-600' : ''}`}>
+                        {act.type === 'sale' ? '+' : '-'}₹{act.amount.toLocaleString('en-IN')}
+                      </div>
+                      <DeleteButton id={act.id} type={act.type} />
                     </div>
                   </div>
                 ))

@@ -1,6 +1,7 @@
 import { createClient } from '@/utils/supabase/server';
 import { redirect } from 'next/navigation';
 import Link from 'next/link';
+import { SubmitButton } from '@/components/ui/submit-button';
 
 export default async function NewPurchasePage() {
   const supabase = await createClient();
@@ -81,12 +82,7 @@ export default async function NewPurchasePage() {
             />
           </div>
 
-          <button 
-            type="submit" 
-            className="w-full h-14 bg-black text-white font-bold rounded-lg hover:bg-pink-600 transition-colors mt-4 text-lg"
-          >
-            Record Purchase
-          </button>
+          <SubmitButton>Record Purchase</SubmitButton>
         </form>
 
       </div>
