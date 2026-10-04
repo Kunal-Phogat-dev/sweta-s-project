@@ -36,7 +36,22 @@ export default async function DashboardPage() {
   // Combine recent activity
   const recentSales = (sales || []).map(s => ({ id: s.id, type: 'sale', amount: s.total, date: s.date, title: 'Sale' }));
   const recentPurchases = (purchases || []).map(p => ({ id: p.id, type: 'purchase', amount: p.total, date: p.date, title: 'Purchase' }));
-  const allActivity = [...recentSales, ...recentPurchases].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()).slice(0, 5);
+  const allActivity = [...recentSales, ...recentPurchases].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+  const recentActivity = allActivity.slice(0, 5);
+
+  // Calculate Real Chart Data (Last 7 Days)
+  const chartData = [];
+  for (let i = 6; i >= 0; i--) {
+    const d = new Date();
+    d.setDate(d.getDate() - i);
+    const dateStr = d.toISOString().split('T')[0];
+    const shortName = d.toLocaleDateString('en-US', { weekday: 'short' });
+    
+    const daySales = allActivity.filter(a => a.type === 'sale' && a.date.startsWith(dateStr)).reduce((sum, a) => sum + a.amount, 0);
+    const dayPurchases = allActivity.filter(a => a.type === 'purchase' && a.date.startsWith(dateStr)).reduce((sum, a) => sum + a.amount, 0);
+    
+    chartData.push({ name: shortName, In: daySales, Out: dayPurchases });
+  }
 
   return (
     <div className="min-h-screen bg-[#fafaf9] text-[#1c1917] selection:bg-pink-200">
@@ -104,7 +119,7 @@ export default async function DashboardPage() {
                 <option>This Week</option>
               </select>
             </div>
-            <CashflowChart />
+            <CashflowChart data={chartData} />
           </div>
           
           <div className="bg-white p-6 md:p-8 rounded-3xl border border-gray-100 shadow-sm flex flex-col">
@@ -113,10 +128,10 @@ export default async function DashboardPage() {
             </div>
             
             <div className="flex-1 space-y-6">
-              {allActivity.length === 0 ? (
+              {recentActivity.length === 0 ? (
                 <div className="text-gray-400 text-sm">No recent activity yet.</div>
               ) : (
-                allActivity.map(act => (
+                recentActivity.map(act => (
                   <div key={act.id} className="flex justify-between items-center">
                     <div className="flex items-center gap-4">
                       <div className={`w-10 h-10 rounded-full flex items-center justify-center font-bold ${act.type === 'sale' ? 'bg-green-50 text-green-600' : 'bg-pink-50 text-pink-600'}`}>

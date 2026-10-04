@@ -2,17 +2,7 @@
 
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend } from 'recharts';
 
-const data = [
-  { name: 'Mon', In: 4000, Out: 2400 },
-  { name: 'Tue', In: 3000, Out: 1398 },
-  { name: 'Wed', In: 2000, Out: 9800 },
-  { name: 'Thu', In: 2780, Out: 3908 },
-  { name: 'Fri', In: 1890, Out: 4800 },
-  { name: 'Sat', In: 2390, Out: 3800 },
-  { name: 'Sun', In: 3490, Out: 4300 },
-];
-
-export function CashflowChart() {
+export function CashflowChart({ data }: { data: any[] }) {
   return (
     <div className="h-[400px] w-full mt-4">
       <ResponsiveContainer width="100%" height="100%">
