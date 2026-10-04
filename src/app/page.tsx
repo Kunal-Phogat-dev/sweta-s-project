@@ -8,7 +8,7 @@ export default function LandingPage() {
       {/* Brutalist / Minimalist Navigation */}
       <nav className="border-b border-black">
         <div className="mx-auto max-w-7xl px-4 py-4 flex items-center justify-between">
-          <div className="text-2xl font-black tracking-tighter uppercase">
+          <div className="text-2xl font-bold tracking-tighter uppercase">
             LedgerLite
           </div>
           
@@ -31,7 +31,7 @@ export default function LandingPage() {
         <div className="mx-auto max-w-7xl px-4 py-24 md:py-32 grid md:grid-cols-2 gap-12 items-end">
           
           <div>
-            <h1 className="text-6xl md:text-8xl font-black leading-none tracking-tighter uppercase mb-8">
+            <h1 className="text-6xl md:text-8xl font-bold leading-none tracking-tighter uppercase mb-8">
               Stop 
               <br />losing 
               <br />money.
@@ -51,7 +51,7 @@ export default function LandingPage() {
 
           {/* Stark, no-glow mockup */}
           <div className="border-4 border-black bg-pink-50 aspect-square p-8 flex flex-col justify-end relative shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
-            <div className="text-4xl font-black mb-4">Cashflow</div>
+            <div className="text-4xl font-bold mb-4">Cashflow</div>
             <div className="w-full h-1 bg-black mb-4"></div>
             <div className="flex justify-between font-bold text-xl">
               <span>IN</span>
@@ -68,21 +68,21 @@ export default function LandingPage() {
 
       {/* Direct, non-bento feature list */}
       <section className="mx-auto max-w-7xl px-4 py-24">
-        <h2 className="text-4xl font-black uppercase mb-16 border-b-4 border-black inline-block">The hard truth</h2>
+        <h2 className="text-4xl font-bold uppercase mb-16 border-b-4 border-black inline-block">The hard truth</h2>
         
         <div className="space-y-12 max-w-3xl font-medium text-xl">
           <div className="pl-6 border-l-4 border-pink-500">
-            <strong className="block text-2xl font-black mb-2">1. Spreadsheets break.</strong>
+            <strong className="block text-2xl font-bold mb-2">1. Spreadsheets break.</strong>
             You are one accidental keyboard smash away from deleting your entire customer history. LedgerLite locks down your data in a real database.
           </div>
           
           <div className="pl-6 border-l-4 border-black">
-            <strong className="block text-2xl font-black mb-2">2. You forget who owes you.</strong>
+            <strong className="block text-2xl font-bold mb-2">2. You forget who owes you.</strong>
             If you don't write down exactly who took credit, you lose that money forever. We track every single unpaid invoice automatically.
           </div>
           
           <div className="pl-6 border-l-4 border-pink-500">
-            <strong className="block text-2xl font-black mb-2">3. Complex tools waste time.</strong>
+            <strong className="block text-2xl font-bold mb-2">3. Complex tools waste time.</strong>
             No "synergy" features. No AI chatbots. Just a raw, blazing fast form to log your daily sales and expenses.
           </div>
         </div>
@@ -91,7 +91,7 @@ export default function LandingPage() {
       {/* Utilitarian Footer */}
       <footer className="bg-black text-white py-12">
         <div className="mx-auto max-w-7xl px-4 flex flex-col md:flex-row justify-between items-start md:items-center">
-          <div className="text-2xl font-black uppercase tracking-tighter mb-4 md:mb-0">
+          <div className="text-2xl font-bold uppercase tracking-tighter mb-4 md:mb-0">
             LedgerLite
           </div>
           <div className="text-sm font-bold text-gray-400">

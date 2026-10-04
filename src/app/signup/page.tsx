@@ -35,7 +35,7 @@ export default function SignupPage() {
       {/* Brutalist Nav */}
       <nav className="border-b border-black">
         <div className="mx-auto max-w-7xl px-4 py-4">
-          <Link href="/" className="text-2xl font-black tracking-tighter uppercase hover:bg-black hover:text-white px-2 py-1 transition-none">
+          <Link href="/" className="text-2xl font-bold tracking-tighter uppercase hover:bg-black hover:text-white px-2 py-1 transition-none">
             LedgerLite
           </Link>
         </div>
@@ -46,13 +46,13 @@ export default function SignupPage() {
         <div className="w-full max-w-md">
           
           <div className="border-4 border-black bg-pink-50 p-8 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]">
-            <h1 className="text-4xl font-black uppercase mb-2 border-b-4 border-black inline-block">Join</h1>
+            <h1 className="text-4xl font-bold uppercase mb-2 border-b-4 border-black inline-block">Join</h1>
             <p className="font-medium text-lg mb-8 mt-4">Create your ledger.</p>
 
             <form onSubmit={handleSignup} className="space-y-6">
               
               <div className="space-y-2">
-                <label className="block text-xl font-black uppercase">Email</label>
+                <label className="block text-xl font-bold uppercase">Email</label>
                 <input 
                   type="email" 
                   required
@@ -64,7 +64,7 @@ export default function SignupPage() {
               </div>
 
               <div className="space-y-2">
-                <label className="block text-xl font-black uppercase">Password</label>
+                <label className="block text-xl font-bold uppercase">Password</label>
                 <input 
                   type="password" 
                   required
@@ -84,7 +84,7 @@ export default function SignupPage() {
               <button 
                 type="submit" 
                 disabled={loading}
-                className="w-full h-16 bg-black text-white text-2xl font-black uppercase hover:bg-pink-600 active:translate-y-1 active:translate-x-1 active:shadow-none transition-none shadow-[4px_4px_0px_0px_rgba(0,0,0,0.3)] disabled:opacity-50 disabled:cursor-not-allowed"
+                className="w-full h-16 bg-black text-white text-2xl font-bold uppercase hover:bg-pink-600 active:translate-y-1 active:translate-x-1 active:shadow-none transition-none shadow-[4px_4px_0px_0px_rgba(0,0,0,0.3)] disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {loading ? 'WAIT...' : 'CREATE ACCOUNT'}
               </button>
