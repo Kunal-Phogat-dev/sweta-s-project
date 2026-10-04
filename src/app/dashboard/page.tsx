@@ -1,123 +1,121 @@
 import Link from 'next/link';
 import { ArrowRight, Plus, Receipt, LogOut } from 'lucide-react';
+import { CashflowChart } from '@/components/dashboard/cashflow-chart';
 
 export default function DashboardPage() {
   return (
-    <div className="min-h-screen bg-background text-foreground selection:bg-primary-200 p-4 md:p-8">
+    <div className="min-h-screen bg-[#fafaf9] text-[#1c1917] selection:bg-pink-200">
       
-      {/* Premium Minimalist Header */}
-      <header className="flex flex-col md:flex-row justify-between items-start md:items-center mb-12 border-b-2 border-black pb-6">
-        <div>
-          <h1 className="text-4xl md:text-5xl font-bold uppercase tracking-tighter">Dashboard</h1>
-          <p className="text-lg font-medium text-gray-500 mt-1">Overview of your business</p>
+      {/* Ultra Clean Topbar */}
+      <header className="bg-white border-b border-gray-100">
+        <div className="mx-auto max-w-7xl px-4 md:px-8 h-20 flex justify-between items-center">
+          <div className="flex items-center gap-3">
+            <div className="w-8 h-8 bg-black rounded-lg"></div>
+            <h1 className="text-xl font-bold tracking-tight">LedgerLite</h1>
+          </div>
+          <Link 
+            href="/"
+            className="text-sm font-semibold text-gray-500 hover:text-black flex items-center gap-2 transition-colors"
+          >
+            <LogOut className="w-4 h-4" /> Sign Out
+          </Link>
         </div>
-        <Link 
-          href="/"
-          className="mt-4 md:mt-0 px-5 py-2.5 bg-black text-white font-bold uppercase border-2 border-black hover:bg-primary-600 hover:border-primary-600 transition-colors flex items-center gap-2"
-        >
-          <LogOut className="w-4 h-4" /> Sign Out
-        </Link>
       </header>
 
-      {/* Main Balances */}
-      <div className="grid md:grid-cols-2 gap-6 mb-12">
-        {/* Cash Card */}
-        <div className="bg-white border-2 border-black p-8 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] flex flex-col justify-between">
-          <h2 className="text-lg font-bold uppercase text-gray-500 mb-6 tracking-widest">Cash In Hand</h2>
-          <div className="text-5xl md:text-7xl font-bold tracking-tighter">₹45,200</div>
-        </div>
-
-        {/* Bank Card */}
-        <div className="bg-primary-50 border-2 border-black p-8 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] flex flex-col justify-between relative overflow-hidden">
-          <h2 className="text-lg font-bold uppercase text-primary-900 mb-6 tracking-widest relative z-10">Bank Balance</h2>
-          <div className="text-5xl md:text-7xl font-bold text-primary-900 tracking-tighter relative z-10">₹1,24,500</div>
-          {/* Subtle geometric accent */}
-          <div className="absolute -bottom-12 -right-12 w-48 h-48 bg-primary-200 rounded-full blur-3xl opacity-50 z-0 pointer-events-none"></div>
-        </div>
-      </div>
-
-      {/* Secondary Balances */}
-      <div className="grid md:grid-cols-2 gap-6 mb-12">
-        {/* Receivables */}
-        <div className="bg-white border-2 border-black p-6 hover:bg-gray-50 transition-colors flex justify-between items-center group cursor-pointer">
+      <main className="mx-auto max-w-7xl px-4 md:px-8 py-12">
+        <div className="flex justify-between items-end mb-10">
           <div>
-            <h2 className="text-sm font-bold uppercase text-gray-500 mb-1 tracking-widest">You'll Receive</h2>
+            <h2 className="text-3xl font-bold tracking-tight">Dashboard</h2>
+            <p className="text-gray-500 mt-1">Here's what's happening today.</p>
+          </div>
+          <div className="flex gap-3">
+            <Link href="/expenses/new" className="hidden md:flex px-4 py-2.5 bg-white text-black font-semibold rounded-lg border border-gray-200 hover:bg-gray-50 transition-colors shadow-sm items-center gap-2">
+              <Receipt className="w-4 h-4" /> Log Expense
+            </Link>
+            <Link href="/sales/new" className="px-4 py-2.5 bg-black text-white font-semibold rounded-lg hover:bg-pink-600 transition-colors shadow-sm flex items-center gap-2">
+              <Plus className="w-4 h-4" /> New Sale
+            </Link>
+          </div>
+        </div>
+
+        {/* Clean Metrics Row */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 mb-8">
+          <div className="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm flex flex-col justify-between h-32">
+            <div className="text-sm font-semibold text-gray-500">Cash in Hand</div>
+            <div className="text-3xl font-bold">₹45,200</div>
+          </div>
+          <div className="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm flex flex-col justify-between h-32">
+            <div className="text-sm font-semibold text-gray-500">Bank Balance</div>
+            <div className="text-3xl font-bold">₹1,24,500</div>
+          </div>
+          <div className="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm flex flex-col justify-between h-32 relative overflow-hidden group">
+            <div className="text-sm font-semibold text-gray-500">Receivables</div>
             <div className="text-3xl font-bold">₹32,000</div>
+            <div className="absolute right-0 top-0 bottom-0 w-1 bg-green-400 group-hover:w-2 transition-all"></div>
           </div>
-          <div className="w-12 h-12 rounded-full border-2 border-black flex items-center justify-center group-hover:bg-primary-500 group-hover:text-white transition-colors">
-            <ArrowRight className="w-5 h-5" />
-          </div>
-        </div>
-
-        {/* Payables */}
-        <div className="bg-white border-2 border-black p-6 hover:bg-gray-50 transition-colors flex justify-between items-center group cursor-pointer">
-          <div>
-            <h2 className="text-sm font-bold uppercase text-gray-500 mb-1 tracking-widest">You'll Pay</h2>
+          <div className="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm flex flex-col justify-between h-32 relative overflow-hidden group">
+            <div className="text-sm font-semibold text-gray-500">Payables</div>
             <div className="text-3xl font-bold">₹15,400</div>
-          </div>
-          <div className="w-12 h-12 rounded-full border-2 border-black flex items-center justify-center group-hover:bg-black group-hover:text-white transition-colors">
-            <ArrowRight className="w-5 h-5" />
+            <div className="absolute right-0 top-0 bottom-0 w-1 bg-pink-500 group-hover:w-2 transition-all"></div>
           </div>
         </div>
-      </div>
 
-      {/* Quick Actions & Recent */}
-      <div className="grid lg:grid-cols-3 gap-8">
-        
-        {/* Actions Menu */}
-        <div className="lg:col-span-1 space-y-4">
-          <h3 className="text-xl font-bold uppercase tracking-widest mb-6 border-b-2 border-black pb-2">Actions</h3>
+        {/* Working Graphical Area */}
+        <div className="grid lg:grid-cols-3 gap-6">
+          <div className="lg:col-span-2 bg-white p-6 md:p-8 rounded-3xl border border-gray-100 shadow-sm">
+            <div className="flex justify-between items-center mb-6">
+              <h3 className="text-lg font-bold">Cashflow Overview</h3>
+              <select className="bg-gray-50 border border-gray-200 text-sm font-medium rounded-lg px-3 py-1.5 outline-none focus:ring-2 focus:ring-black">
+                <option>This Week</option>
+                <option>This Month</option>
+              </select>
+            </div>
+            <CashflowChart />
+          </div>
           
-          <Link href="/sales/new" className="flex items-center justify-between p-5 bg-black text-white border-2 border-black hover:bg-primary-600 hover:border-primary-600 transition-colors group">
-            <span className="text-lg font-bold uppercase">New Sale</span>
-            <Plus className="w-6 h-6 group-hover:rotate-90 transition-transform" />
-          </Link>
-          
-          <Link href="/purchases/new" className="flex items-center justify-between p-5 bg-white text-black border-2 border-black hover:bg-gray-100 transition-colors group">
-            <span className="text-lg font-bold uppercase">New Purchase</span>
-            <Receipt className="w-6 h-6 group-hover:rotate-12 transition-transform" />
-          </Link>
-          
-          <Link href="/expenses/new" className="flex items-center justify-between p-5 bg-white text-black border-2 border-black hover:bg-gray-100 transition-colors group">
-            <span className="text-lg font-bold uppercase">Log Expense</span>
-            <ArrowRight className="w-6 h-6 group-hover:-rotate-45 transition-transform" />
-          </Link>
-        </div>
-
-        {/* Recent Activity */}
-        <div className="lg:col-span-2">
-          <h3 className="text-xl font-bold uppercase tracking-widest mb-6 border-b-2 border-black pb-2">Recent Activity</h3>
-          
-          <div className="bg-white border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] divide-y-2 divide-black">
+          <div className="bg-white p-6 md:p-8 rounded-3xl border border-gray-100 shadow-sm flex flex-col">
+            <div className="flex justify-between items-center mb-6">
+              <h3 className="text-lg font-bold">Recent Activity</h3>
+              <button className="text-sm font-semibold text-pink-600 hover:text-pink-700">View All</button>
+            </div>
             
-            <div className="flex justify-between items-center p-5 hover:bg-primary-50 transition-colors">
-              <div>
-                <div className="font-bold text-lg uppercase">Sale to Rahul</div>
-                <div className="text-gray-500 text-sm font-medium">Today at 14:30</div>
+            <div className="flex-1 space-y-6">
+              <div className="flex justify-between items-center">
+                <div className="flex items-center gap-4">
+                  <div className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center font-bold text-gray-500">R</div>
+                  <div>
+                    <div className="font-bold text-sm">Sale to Rahul</div>
+                    <div className="text-xs font-medium text-gray-400">Today, 2:30 PM</div>
+                  </div>
+                </div>
+                <div className="font-bold text-sm text-green-600">+₹5,000</div>
               </div>
-              <div className="text-xl font-bold text-primary-600">+₹5,000</div>
-            </div>
 
-            <div className="flex justify-between items-center p-5 hover:bg-gray-50 transition-colors">
-              <div>
-                <div className="font-bold text-lg uppercase">Office Supplies</div>
-                <div className="text-gray-500 text-sm font-medium">Yesterday</div>
+              <div className="flex justify-between items-center">
+                <div className="flex items-center gap-4">
+                  <div className="w-10 h-10 rounded-full bg-pink-50 flex items-center justify-center font-bold text-pink-600">O</div>
+                  <div>
+                    <div className="font-bold text-sm">Office Supplies</div>
+                    <div className="text-xs font-medium text-gray-400">Yesterday</div>
+                  </div>
+                </div>
+                <div className="font-bold text-sm">-₹1,200</div>
               </div>
-              <div className="text-xl font-bold">-₹1,200</div>
-            </div>
 
-            <div className="flex justify-between items-center p-5 hover:bg-gray-50 transition-colors">
-              <div>
-                <div className="font-bold text-lg uppercase">Supplier XYZ</div>
-                <div className="text-gray-500 text-sm font-medium">Oct 2, 2026</div>
+              <div className="flex justify-between items-center">
+                <div className="flex items-center gap-4">
+                  <div className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center font-bold text-gray-500">X</div>
+                  <div>
+                    <div className="font-bold text-sm">Supplier XYZ</div>
+                    <div className="text-xs font-medium text-gray-400">Oct 2, 2026</div>
+                  </div>
+                </div>
+                <div className="font-bold text-sm">-₹15,000</div>
               </div>
-              <div className="text-xl font-bold">-₹15,000</div>
             </div>
-
           </div>
         </div>
-
-      </div>
+      </main>
 
     </div>
   );
