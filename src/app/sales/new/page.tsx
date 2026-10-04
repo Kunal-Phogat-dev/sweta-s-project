@@ -1,5 +1,6 @@
 import { createClient } from '@/utils/supabase/server';
 import { redirect } from 'next/navigation';
+import { revalidatePath } from 'next/cache';
 import Link from 'next/link';
 import { SubmitButton } from '@/components/ui/submit-button';
 
@@ -46,7 +47,7 @@ export default async function NewSalePage() {
         note: description
       });
     }
-    
+    revalidatePath('/dashboard');
     redirect('/dashboard');
   }
 
