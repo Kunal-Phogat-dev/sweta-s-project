@@ -4,6 +4,7 @@ import { CashflowChart } from '@/components/dashboard/cashflow-chart';
 import { createClient } from '@/utils/supabase/server';
 import { redirect } from 'next/navigation';
 import { RecentActivityList } from '@/components/ui/recent-activity-list';
+import { fixBalances } from '@/app/actions/fix-balances';
 
 export default async function DashboardPage() {
   const supabase = await createClient();
@@ -77,9 +78,16 @@ export default async function DashboardPage() {
 
       <main className="mx-auto max-w-7xl px-4 md:px-8 py-12">
         <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-8 gap-4">
-          <div>
-            <h2 className="text-3xl font-bold tracking-tight">Dashboard</h2>
-            <p className="text-gray-500 mt-1">Here's what's happening today.</p>
+          <div className="flex items-center gap-4">
+            <div>
+              <h2 className="text-3xl font-bold tracking-tight">Dashboard</h2>
+              <p className="text-gray-500 mt-1">Here's what's happening today.</p>
+            </div>
+            <form action={fixBalances}>
+              <button type="submit" className="px-3 py-1 bg-red-100 text-red-600 text-xs font-bold rounded hover:bg-red-200">
+                Fix Balances
+              </button>
+            </form>
           </div>
           <div className="flex flex-wrap gap-2 md:gap-3 w-full md:w-auto">
             <Link href="/purchases/new" className="flex-1 md:flex-none justify-center px-4 py-2.5 bg-white text-black font-semibold rounded-lg border border-gray-200 hover:bg-gray-50 active:scale-[0.98] transition-all duration-200 shadow-sm flex items-center gap-2">
