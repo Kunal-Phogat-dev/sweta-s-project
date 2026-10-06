@@ -76,17 +76,20 @@ export default async function DashboardPage() {
       </header>
 
       <main className="mx-auto max-w-7xl px-4 md:px-8 py-12">
-        <div className="flex justify-between items-end mb-10">
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-8 gap-4">
           <div>
             <h2 className="text-3xl font-bold tracking-tight">Dashboard</h2>
             <p className="text-gray-500 mt-1">Here's what's happening today.</p>
           </div>
-          <div className="flex gap-3">
-            <Link href="/expenses/new" className="hidden md:flex px-4 py-2.5 bg-white text-black font-semibold rounded-lg border border-gray-200 hover:bg-gray-50 transition-colors shadow-sm items-center gap-2">
-              <Receipt className="w-4 h-4" /> Log Expense
+          <div className="flex flex-wrap gap-2 md:gap-3 w-full md:w-auto">
+            <Link href="/purchases/new" className="flex-1 md:flex-none justify-center px-4 py-2.5 bg-white text-black font-semibold rounded-lg border border-gray-200 hover:bg-gray-50 transition-colors shadow-sm flex items-center gap-2">
+              <Receipt className="w-4 h-4" /> Purchase
             </Link>
-            <Link href="/sales/new" className="px-4 py-2.5 bg-black text-white font-semibold rounded-lg hover:bg-pink-600 transition-colors shadow-sm flex items-center gap-2">
-              <Plus className="w-4 h-4" /> New Sale
+            <Link href="/expenses/new" className="flex-1 md:flex-none justify-center px-4 py-2.5 bg-white text-black font-semibold rounded-lg border border-gray-200 hover:bg-gray-50 transition-colors shadow-sm flex items-center gap-2">
+              <Receipt className="w-4 h-4" /> Expense
+            </Link>
+            <Link href="/sales/new" className="flex-1 md:flex-none justify-center px-4 py-2.5 bg-black text-white font-semibold rounded-lg hover:bg-pink-600 transition-colors shadow-sm flex items-center gap-2">
+              <Plus className="w-4 h-4" /> Sale
             </Link>
           </div>
         </div>
