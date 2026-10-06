@@ -82,13 +82,13 @@ export default async function DashboardPage() {
             <p className="text-gray-500 mt-1">Here's what's happening today.</p>
           </div>
           <div className="flex flex-wrap gap-2 md:gap-3 w-full md:w-auto">
-            <Link href="/purchases/new" className="flex-1 md:flex-none justify-center px-4 py-2.5 bg-white text-black font-semibold rounded-lg border border-gray-200 hover:bg-gray-50 transition-colors shadow-sm flex items-center gap-2">
+            <Link href="/purchases/new" className="flex-1 md:flex-none justify-center px-4 py-2.5 bg-white text-black font-semibold rounded-lg border border-gray-200 hover:bg-gray-50 active:scale-[0.98] transition-all duration-200 shadow-sm flex items-center gap-2">
               <Receipt className="w-4 h-4" /> Purchase
             </Link>
-            <Link href="/expenses/new" className="flex-1 md:flex-none justify-center px-4 py-2.5 bg-white text-black font-semibold rounded-lg border border-gray-200 hover:bg-gray-50 transition-colors shadow-sm flex items-center gap-2">
+            <Link href="/expenses/new" className="flex-1 md:flex-none justify-center px-4 py-2.5 bg-white text-black font-semibold rounded-lg border border-gray-200 hover:bg-gray-50 active:scale-[0.98] transition-all duration-200 shadow-sm flex items-center gap-2">
               <Receipt className="w-4 h-4" /> Expense
             </Link>
-            <Link href="/sales/new" className="flex-1 md:flex-none justify-center px-4 py-2.5 bg-black text-white font-semibold rounded-lg hover:bg-pink-600 transition-colors shadow-sm flex items-center gap-2">
+            <Link href="/sales/new" className="flex-1 md:flex-none justify-center px-4 py-2.5 bg-black text-white font-semibold rounded-lg hover:bg-pink-600 active:scale-[0.98] transition-all duration-200 shadow-sm flex items-center gap-2">
               <Plus className="w-4 h-4" /> Sale
             </Link>
           </div>
@@ -96,23 +96,23 @@ export default async function DashboardPage() {
 
         {/* Clean Metrics Row */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 mb-8">
-          <div className="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm flex flex-col justify-between h-32">
+          <div className="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-300 cursor-default flex flex-col justify-between h-32">
             <div className="text-sm font-semibold text-gray-500">Cash in Hand</div>
             <div className="text-3xl font-bold">₹{cashBalance.toLocaleString('en-IN')}</div>
           </div>
-          <div className="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm flex flex-col justify-between h-32">
+          <div className="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-300 cursor-default flex flex-col justify-between h-32">
             <div className="text-sm font-semibold text-gray-500">Bank Balance</div>
             <div className="text-3xl font-bold">₹{bankBalance.toLocaleString('en-IN')}</div>
           </div>
-          <div className="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm flex flex-col justify-between h-32 relative overflow-hidden group">
+          <div className="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-300 cursor-default flex flex-col justify-between h-32 relative overflow-hidden group">
             <div className="text-sm font-semibold text-gray-500">Receivables</div>
             <div className="text-3xl font-bold">₹{salesDue.toLocaleString('en-IN')}</div>
-            <div className="absolute right-0 top-0 bottom-0 w-1 bg-green-400 group-hover:w-2 transition-all"></div>
+            <div className="absolute right-0 top-0 bottom-0 w-1 bg-green-400 group-hover:w-2 transition-all duration-300"></div>
           </div>
-          <div className="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm flex flex-col justify-between h-32 relative overflow-hidden group">
+          <div className="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-300 cursor-default flex flex-col justify-between h-32 relative overflow-hidden group">
             <div className="text-sm font-semibold text-gray-500">Payables</div>
             <div className="text-3xl font-bold">₹{purchasesDue.toLocaleString('en-IN')}</div>
-            <div className="absolute right-0 top-0 bottom-0 w-1 bg-pink-500 group-hover:w-2 transition-all"></div>
+            <div className="absolute right-0 top-0 bottom-0 w-1 bg-pink-500 group-hover:w-2 transition-all duration-300"></div>
           </div>
         </div>
 
