@@ -3,7 +3,7 @@ import { ArrowRight, Plus, Receipt, LogOut } from 'lucide-react';
 import { CashflowChart } from '@/components/dashboard/cashflow-chart';
 import { createClient } from '@/utils/supabase/server';
 import { redirect } from 'next/navigation';
-import { DeleteButton } from '@/components/ui/delete-button';
+import { RecentActivityList } from '@/components/ui/recent-activity-list';
 
 export default async function DashboardPage() {
   const supabase = await createClient();
@@ -133,31 +133,7 @@ export default async function DashboardPage() {
               <h3 className="text-lg font-bold">Recent Activity</h3>
             </div>
             
-            <div className="flex-1 space-y-6">
-              {recentActivity.length === 0 ? (
-                <div className="text-gray-400 text-sm">No recent activity yet.</div>
-              ) : (
-                recentActivity.map(act => (
-                  <div key={act.id} className="flex justify-between items-center">
-                    <div className="flex items-center gap-4">
-                      <div className={`w-10 h-10 rounded-full flex items-center justify-center font-bold ${act.type === 'sale' ? 'bg-green-50 text-green-600' : 'bg-pink-50 text-pink-600'}`}>
-                        {act.type === 'sale' ? 'S' : act.type === 'purchase' ? 'P' : 'E'}
-                      </div>
-                      <div>
-                        <div className="font-bold text-sm">{act.title}</div>
-                        <div className="text-xs font-medium text-gray-400">{new Date(act.date).toLocaleDateString()}</div>
-                      </div>
-                    </div>
-                    <div className="flex items-center gap-4">
-                      <div className={`font-bold text-sm ${act.type === 'sale' ? 'text-green-600' : ''}`}>
-                        {act.type === 'sale' ? '+' : '-'}₹{act.amount.toLocaleString('en-IN')}
-                      </div>
-                      <DeleteButton id={act.id} type={act.type} />
-                    </div>
-                  </div>
-                ))
-              )}
-            </div>
+            <RecentActivityList initialActivities={recentActivity} />
           </div>
         </div>
       </main>
