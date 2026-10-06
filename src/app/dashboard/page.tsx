@@ -5,6 +5,7 @@ import { createClient } from '@/utils/supabase/server';
 import { redirect } from 'next/navigation';
 import { RecentActivityList } from '@/components/ui/recent-activity-list';
 import { fixBalances } from '@/app/actions/fix-balances';
+import { resetAllData } from '@/app/actions/reset-all';
 
 export default async function DashboardPage() {
   const supabase = await createClient();
@@ -84,8 +85,13 @@ export default async function DashboardPage() {
               <p className="text-gray-500 mt-1">Here's what's happening today.</p>
             </div>
             <form action={fixBalances}>
-              <button type="submit" className="px-3 py-1 bg-red-100 text-red-600 text-xs font-bold rounded hover:bg-red-200">
+              <button type="submit" className="px-3 py-1 bg-yellow-100 text-yellow-700 text-xs font-bold rounded hover:bg-yellow-200">
                 Fix Balances
+              </button>
+            </form>
+            <form action={resetAllData}>
+              <button type="submit" className="px-3 py-1 bg-red-100 text-red-600 text-xs font-bold rounded hover:bg-red-200">
+                Hard Reset All
               </button>
             </form>
           </div>
