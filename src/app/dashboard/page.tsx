@@ -28,8 +28,8 @@ export default async function DashboardPage() {
   ]);
 
   // Calculate Balances
-  const cashBalance = (cashbook || []).filter(e => e.payment_mode === 'cash').reduce((acc, e) => acc + (e.type === 'in' ? e.amount : -e.amount), 0);
-  const bankBalance = (cashbook || []).filter(e => e.payment_mode === 'bank').reduce((acc, e) => acc + (e.type === 'in' ? e.amount : -e.amount), 0);
+  const cashBalance = (cashbook || []).filter(e => e.mode === 'cash').reduce((acc, e) => acc + (e.type === 'in' ? Number(e.amount) : -Number(e.amount)), 0);
+  const bankBalance = (cashbook || []).filter(e => e.mode === 'bank').reduce((acc, e) => acc + (e.type === 'in' ? Number(e.amount) : -Number(e.amount)), 0);
   
   const salesDue = (sales || []).reduce((acc, s) => acc + (s.total - (s.amount_paid || 0)), 0);
   const purchasesDue = (purchases || []).reduce((acc, p) => acc + (p.total - (p.amount_paid || 0)), 0);
